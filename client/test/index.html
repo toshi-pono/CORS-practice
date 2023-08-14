@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Test</title>
+  </head>
+  <body>
+    <div>
+      <h2>ログイン</h2>
+      <label for="username">ユーザー名</label>
+      <input
+        id="username"
+        type="text"
+        name="username"
+        placeholder="ユーザー名"
+      />
+      <button id="login" onclick="handleLogin()">ログイン</button>
+    </div>
+    <div>
+      <h2>ユーザー作成</h2>
+      <label for="create-username">ユーザー名</label>
+      <input
+        id="create-username"
+        type="text"
+        name="username"
+        placeholder="ユーザー名"
+      />
+      <button id="create" onclick="handleCreate()">作成</button>
+    </div>
+    <script>
+      const handleLogin = async () => {
+        const username = document.getElementById("username").value;
+        if (username) {
+          const res = await fetch("http://api.test.localhost/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username }),
+            credentials: "include", // cross-origin / same-site
+          });
+          if (res.status === 200) {
+            alert("ログインしました");
+          }
+        }
+      };
+
+      const handleCreate = async () => {
+        const createUsername = document.getElementById("create-username").value;
+        if (createUsername) {
+          const res = await fetch("http://api.test.localhost/users", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username: createUsername }),
+          });
+          if (res.status === 201) {
+            alert("ユーザーを作成しました");
+          }
+        }
+      };
+    </script>
+  </body>
+</html>
