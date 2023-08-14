@@ -25,7 +25,7 @@ func main() {
 		},
 		AllowMethods:     []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 		AllowHeaders:     []string{},
-		AllowCredentials: false,
+		AllowCredentials: true,
 		ExposeHeaders:    []string{},
 		MaxAge:           0,
 	}))

@@ -45,6 +45,8 @@ func (h *Handlers) Login(c echo.Context) error {
 				return echo.NewHTTPError(http.StatusInternalServerError)
 			}
 			sess.Values["username"] = user.Username
+			sess.Options.Secure = false
+
 			if err := sess.Save(c.Request(), c.Response()); err != nil {
 				c.Logger().Error(err)
 				return echo.NewHTTPError(http.StatusInternalServerError)
